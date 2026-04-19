@@ -1,1 +1,14 @@
 /.lake
+/build
+
+# Lean compilation artifacts
+*.olean
+*.ilean
+*.trace
+*.hash
+*.c
+
+# macOS / editor noise
+.DS_Store
+*.swp
+*.swo
