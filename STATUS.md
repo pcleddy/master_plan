@@ -2,7 +2,7 @@
 
 ## Current State
 
-Repository bootstrap is complete. The project now has a working Lean 4 + Mathlib workspace, a stable initial source-tree shape, and the first reusable theorem layer around pure states and phase-equivalence.
+Repository bootstrap is complete. The project now has a working Lean 4 + Mathlib workspace, a stable initial source-tree shape, and a first reusable theorem layer around pure states, phase-equivalence, bounded operators, and bounded observables.
 
 ## 10k View
 
@@ -17,13 +17,16 @@ Repository bootstrap is complete. The project now has a working Lean 4 + Mathlib
 Current theorem inventory is intentionally small and focused on the bounded-operator side of the plan.
 
 - `Foundations/HilbertBasic`: pure-state predicate and basic norm consequences
+- `Foundations/Operators`: basic bounded-operator evaluation and composition lemmas
+- `Foundations/Unitary`: stage-one unitary subgroup wrapper with identity, composition, norm-preservation, and inner-product-preservation lemmas
 - `Quantum/States`: phase-equivalence scaffolding and pure-state invariance under unit-norm scalars
-- `Quantum/Observables`: stage-one bounded observable wrapper for self-adjoint maps
+- `Quantum/Observables`: stage-one bounded observable wrapper, first expectation-value definition, and closure under `0`, `+`, `-`, real scalar multiplication, conjugation, and the Gram operator construction `A†A`
+- `Quantum/Examples/Qubit`: finite-dimensional sanity example on `EuclideanSpace Complex (Fin 2)` with a concrete identity-operator Gram check
 
 ## Counts
 
-- Lean modules: 6 library files plus root/exe files
-- Proven lemmas/theorems: 12 in the foundational quantum-state layer
+- Lean modules: 7 library files plus root/exe files
+- Proven lemmas/theorems: 34 across the current foundation layer
 - Open research machinery implemented: 0
   This is deliberate. The project is still avoiding spectral theorem, unbounded operators, RG flow, and spectral geometry until the base layer is less fragile.
 
@@ -35,8 +38,8 @@ Current theorem inventory is intentionally small and focused on the bounded-oper
 
 ## Immediate Next Actions
 
-1. Extend `Observables` and `Operators` with the first closure lemmas worth reusing
-2. Add one milestone note for the bootstrap completion and architectural choice to stay bounded-operator first
+1. Add the first observable-specific expectation lemmas, especially reality of expectation values for self-adjoint operators
+2. Add one nontrivial finite-dimensional operator example beyond the identity sanity check
 3. Start reducing overly broad imports where that improves rebuild speed
 4. Record any hard Mathlib gaps before creating custom abstractions
 
