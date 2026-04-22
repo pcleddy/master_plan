@@ -18,7 +18,7 @@ Update this file as you complete problems. Use the status indicators below.
 - Current stage: practical bootstrap plus the first bounded-operator theorem layer
 - Build status: `lake build` is green
 - Current code focus: states, bounded operators, observables, expectation-value scaffolding, and a minimal qubit example
-- First Sprint completion estimate: `~75%`
+- First Sprint completion estimate: `~85%`
 - Heavy downstream targets such as the spectral theorem, RG flow, and spectral geometry are still intentionally deferred
 
 ## Stage Tracker
@@ -60,6 +60,7 @@ These percentages are planning weights, not theorem counts. They are meant to sh
 - Observable closure under `0`, `+`, `-`, and real scalar multiplication is proved
 - Observable conjugation and Gram-operator observability (`A†A`) are proved
 - A first expectation-value definition exists, with algebraic lemmas for `0`, `+`, and scalar multiplication
+- Expectation values of observables are now proved to be fixed by `star`, with a complex corollary `im = 0`
 
 ### Finite-Dimensional Sanity Check
 
@@ -76,7 +77,6 @@ These percentages are planning weights, not theorem counts. They are meant to sh
 
 ### 🟠 Complete The First Sprint Properly (`12%`)
 
-- Add the first expectation theorem specific to observables, especially that self-adjoint operators have real expectation values
 - Add a nontrivial finite-dimensional operator example beyond the identity sanity check
 - Reduce imports where possible and record Mathlib API findings more explicitly
 

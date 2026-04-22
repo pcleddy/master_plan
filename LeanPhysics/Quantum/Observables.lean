@@ -67,4 +67,30 @@ theorem expectationValue_smul {A : BoundedOperator (𝕜 := 𝕜) (H := H)} (ψ 
       c * expectationValue (𝕜 := 𝕜) (H := H) A ψ := by
   simp [expectationValue, inner_smul_right]
 
+theorem observable_expectationValue_star_eq_self
+    {A : BoundedOperator (𝕜 := 𝕜) (H := H)} (hA : Observable A) (ψ : H) :
+    star (expectationValue (𝕜 := 𝕜) (H := H) A ψ) =
+      expectationValue (𝕜 := 𝕜) (H := H) A ψ := by
+  have hA' : A.adjoint = A := by
+    rw [Observable] at hA
+    simpa using hA
+  have hconj : star (inner 𝕜 ψ (A ψ)) = inner 𝕜 (A ψ) ψ := by
+    exact inner_conj_symm (A ψ) ψ
+  have hsymm : inner 𝕜 (A ψ) ψ = inner 𝕜 ψ (A ψ) := by
+    calc
+      inner 𝕜 (A ψ) ψ = inner 𝕜 ψ (A.adjoint ψ) := by
+        simpa using (A.adjoint_inner_right ψ ψ).symm
+      _ = inner 𝕜 ψ (A ψ) := by simp [hA']
+  simpa [expectationValue] using hconj.trans hsymm
+
+theorem observable_expectationValue_im_eq_zero
+    {H : Type*} [NormedAddCommGroup H] [InnerProductSpace Complex H] [CompleteSpace H]
+    {A : BoundedOperator (𝕜 := Complex) (H := H)} (hA : Observable A) (ψ : H) :
+    (expectationValue (𝕜 := Complex) (H := H) A ψ).im = 0 := by
+  have hstar :
+      star (expectationValue (𝕜 := Complex) (H := H) A ψ) =
+        expectationValue (𝕜 := Complex) (H := H) A ψ :=
+    observable_expectationValue_star_eq_self (𝕜 := Complex) (H := H) hA ψ
+  exact Complex.conj_eq_iff_im.mp hstar
+
 end LeanPhysics

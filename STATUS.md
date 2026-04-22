@@ -20,13 +20,13 @@ Current theorem inventory is intentionally small and focused on the bounded-oper
 - `Foundations/Operators`: basic bounded-operator evaluation and composition lemmas
 - `Foundations/Unitary`: stage-one unitary subgroup wrapper with identity, composition, norm-preservation, and inner-product-preservation lemmas
 - `Quantum/States`: phase-equivalence scaffolding and pure-state invariance under unit-norm scalars
-- `Quantum/Observables`: stage-one bounded observable wrapper, first expectation-value definition, and closure under `0`, `+`, `-`, real scalar multiplication, conjugation, and the Gram operator construction `A†A`
+- `Quantum/Observables`: stage-one bounded observable wrapper, first expectation-value definition, expectation reality lemmas for observables, and closure under `0`, `+`, `-`, real scalar multiplication, conjugation, and the Gram operator construction `A†A`
 - `Quantum/Examples/Qubit`: finite-dimensional sanity example on `EuclideanSpace Complex (Fin 2)` with a concrete identity-operator Gram check
 
 ## Counts
 
 - Lean modules: 7 library files plus root/exe files
-- Proven lemmas/theorems: 34 across the current foundation layer
+- Proven lemmas/theorems: 36 across the current foundation layer
 - Open research machinery implemented: 0
   This is deliberate. The project is still avoiding spectral theorem, unbounded operators, RG flow, and spectral geometry until the base layer is less fragile.
 
@@ -38,10 +38,10 @@ Current theorem inventory is intentionally small and focused on the bounded-oper
 
 ## Immediate Next Actions
 
-1. Add the first observable-specific expectation lemmas, especially reality of expectation values for self-adjoint operators
-2. Add one nontrivial finite-dimensional operator example beyond the identity sanity check
-3. Start reducing overly broad imports where that improves rebuild speed
-4. Record any hard Mathlib gaps before creating custom abstractions
+1. Add one nontrivial finite-dimensional operator example beyond the identity sanity check
+2. Start reducing overly broad imports where that improves rebuild speed
+3. Record any hard Mathlib gaps before creating custom abstractions
+4. Decide whether the next expectation-value layer should add positivity/projector lemmas or stay example-driven
 
 ## Risks
 

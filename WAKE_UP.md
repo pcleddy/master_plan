@@ -5,7 +5,7 @@
 - The repository builds with `lake build`
 - Current library entry point is [LeanPhysics.lean](/Users/pleddy/docs/cloudautomat/code/projects/master_plan/LeanPhysics.lean)
 - The project is still in the bounded-operator bootstrap phase of the master plan
-- `First Sprint` is currently estimated at about `75%` complete
+- `First Sprint` is currently estimated at about `85%` complete
 
 ## What Landed Most Recently
 
@@ -17,6 +17,8 @@
   - closure under composition
   - norm preservation
   - inner-product preservation
+- `Quantum/Observables` now also proves the first observable-specific expectation reality result:
+  expectation values of observables are fixed by `star`, and over `Complex` they have zero imaginary part
 - Tracking docs updated:
   - [STATUS.md](/Users/pleddy/docs/cloudautomat/code/projects/master_plan/STATUS.md)
   - [progress.md](/Users/pleddy/docs/cloudautomat/code/projects/master_plan/progress.md)
@@ -32,11 +34,10 @@
 
 ## Best Next Steps
 
-1. Prove the first expectation theorem specific to observables:
-   expectation value of a self-adjoint bounded observable is real.
-2. Add one nontrivial finite-dimensional operator example:
+1. Add one nontrivial finite-dimensional operator example:
    Pauli-style operator or equivalent concrete qubit observable.
-3. Only after that, spend time on import thinning or broader dependency audit cleanup.
+2. Only after that, spend time on import thinning or broader dependency audit cleanup.
+3. Then decide whether the next expectation-value increment should be positivity/projector lemmas or more concrete examples.
 
 ## Notes For The Next Iteration
 
@@ -49,4 +50,5 @@
   - `Unitary.star_mul_self_of_mem`
   - `Unitary.mul_star_self_of_mem`
 - The qubit example currently uses `EuclideanSpace Complex (Fin 2)`, not a plain function alias.
-- If the next step is the “expectation is real” theorem, expect some API search around `RCLike.re`, `conj`, `IsSelfAdjoint`, and `adjoint_inner_left/right`.
+- The “expectation is real” step is now done.
+- If the next step is a Pauli-style example, the likely clean path is to work in `EuclideanSpace Complex (Fin 2)` and define operators via matrices or coordinate-wise formulas, whichever Lean accepts with less coercion noise.
