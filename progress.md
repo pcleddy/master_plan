@@ -18,13 +18,15 @@ Update this file as you complete problems. Use the status indicators below.
 - Current stage: practical bootstrap plus the first bounded-operator theorem layer
 - Build status: `lake build` is green
 - Current code focus: states, bounded operators, observables, expectation-value scaffolding, and a minimal qubit example
-- First Sprint completion estimate: `~85%`
+- First Sprint completion estimate: `100%`
+- Whole master plan completion estimate: `20%`
+- Last verified build size: `3314` jobs after the first import-thinning pass
 - Heavy downstream targets such as the spectral theorem, RG flow, and spectral geometry are still intentionally deferred
 
 ## Stage Tracker
 
 - 🟢 `Bootstrap / First Repository Shape` — `8%` of entire project
-- 🟠 `First Sprint: bounded operators, states, observables, qubit sanity checks` — `12%` of entire project
+- 🟢 `First Sprint: bounded operators, states, observables, qubit sanity checks` — `12%` of entire project
 - 🟡 `Phase 1.1 Hilbert space formalism expansion` — `10%` of entire project
 - 🟡 `Phase 1.2 Bounded operators and spectrum` — `12%` of entire project
 - 🟡 `Phase 1.3 Spectral theorem core` — `12%` of entire project
@@ -67,18 +69,32 @@ These percentages are planning weights, not theorem counts. They are meant to sh
 - `Quantum/Examples/Qubit` exists
 - The qubit example now uses `EuclideanSpace Complex (Fin 2)` as the concrete finite-dimensional Hilbert model
 - The identity operator and its Gram operator are checked in that example
+- A Pauli-Z-style qubit observable is now defined from a Hermitian `2 × 2` matrix
+- The Pauli-Z example is proved observable, fixes `|0⟩`, and has expectation value `1` on `|0⟩`
 
 ### Documentation / Tracking
 
 - `STATUS.md` reflects current repository state
-- Milestones for bootstrap and bounded observables are recorded under `milestones/`
+- Milestones for bootstrap, bounded observables, and First Sprint completion are recorded under `milestones/`
+
+### Import Hygiene
+
+- `LeanPhysics.Basic` now imports the specific inner-product/adjoint and tactic surface needed by the bootstrap layer instead of all of `Mathlib`
+- `Main.lean` no longer repeats the root `LeanPhysics` import
+- `lake build` is verified after the cleanup
+
+### API Audit Notes
+
+- First Mathlib API findings are recorded in `milestones/2026-04-25-first-sprint-complete.md`
+- The sprint ended with aliases and predicates where Mathlib already has the right structure: `ContinuousLinearMap`, `IsSelfAdjoint`, and `unitary`
 
 ## To Do
 
-### 🟠 Complete The First Sprint Properly (`12%`)
+### 🟢 Complete The First Sprint Properly (`12%`)
 
-- Add a nontrivial finite-dimensional operator example beyond the identity sanity check
-- Reduce imports where possible and record Mathlib API findings more explicitly
+- Complete. Continue import thinning only where a module has an obvious broad dependency.
+
+### 🟠 Start Phase 1 Dependency Audit
 
 ### 🟡 Phase 1.1 Hilbert Space Formalism Expansion (`10%`)
 

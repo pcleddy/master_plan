@@ -2,7 +2,8 @@
 Basic shared imports for the LeanPhysics library.
 -/
 
-import Mathlib
+import Mathlib.Analysis.InnerProductSpace.Adjoint
+import Mathlib.Tactic
 
 namespace LeanPhysics
 

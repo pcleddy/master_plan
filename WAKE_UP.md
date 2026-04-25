@@ -4,8 +4,10 @@
 
 - The repository builds with `lake build`
 - Current library entry point is [LeanPhysics.lean](/Users/pleddy/docs/cloudautomat/code/projects/master_plan/LeanPhysics.lean)
-- The project is still in the bounded-operator bootstrap phase of the master plan
-- `First Sprint` is currently estimated at about `85%` complete
+- The practical bootstrap / First Sprint is complete
+- `First Sprint` is currently estimated at `100%` complete
+- Whole master plan completion estimate is `20%`
+- Last verified build size: `3314` jobs
 
 ## What Landed Most Recently
 
@@ -19,6 +21,13 @@
   - inner-product preservation
 - `Quantum/Observables` now also proves the first observable-specific expectation reality result:
   expectation values of observables are fixed by `star`, and over `Complex` they have zero imaginary part
+- `Quantum/Examples/Qubit` now includes a nontrivial finite-dimensional observable:
+  a Pauli-Z-style operator built from a Hermitian `2 × 2` matrix, together with observable and expectation lemmas
+- First import-thinning pass is complete:
+  [LeanPhysics/Basic.lean](/Users/pleddy/docs/cloudautomat/code/projects/master_plan/LeanPhysics/Basic.lean) imports the specific inner-product/adjoint and tactic modules needed by the bootstrap layer instead of all of `Mathlib`
+- [Main.lean](/Users/pleddy/docs/cloudautomat/code/projects/master_plan/Main.lean) no longer repeats the root `LeanPhysics` import
+- First Sprint completion and Mathlib API findings are recorded in:
+  [milestones/2026-04-25-first-sprint-complete.md](/Users/pleddy/docs/cloudautomat/code/projects/master_plan/milestones/2026-04-25-first-sprint-complete.md)
 - Tracking docs updated:
   - [STATUS.md](/Users/pleddy/docs/cloudautomat/code/projects/master_plan/STATUS.md)
   - [progress.md](/Users/pleddy/docs/cloudautomat/code/projects/master_plan/progress.md)
@@ -34,10 +43,9 @@
 
 ## Best Next Steps
 
-1. Add one nontrivial finite-dimensional operator example:
-   Pauli-style operator or equivalent concrete qubit observable.
-2. Only after that, spend time on import thinning or broader dependency audit cleanup.
-3. Then decide whether the next expectation-value increment should be positivity/projector lemmas or more concrete examples.
+1. Begin a written Mathlib dependency audit for Phase 1.1 and Phase 1.2.
+2. Decide whether the next expectation-value increment should be positivity/projector lemmas or more concrete examples.
+3. If another finite-dimensional example is wanted, the clean next candidates are Pauli-X, Pauli-Y, or a rank-one projector.
 
 ## Notes For The Next Iteration
 
@@ -51,4 +59,9 @@
   - `Unitary.mul_star_self_of_mem`
 - The qubit example currently uses `EuclideanSpace Complex (Fin 2)`, not a plain function alias.
 - The “expectation is real” step is now done.
-- If the next step is a Pauli-style example, the likely clean path is to work in `EuclideanSpace Complex (Fin 2)` and define operators via matrices or coordinate-wise formulas, whichever Lean accepts with less coercion noise.
+- The Pauli-Z-style example is now done, and the matrix-backed route worked.
+- The clean pattern is:
+  define a `2 × 2` Hermitian matrix,
+  use `Matrix.toEuclideanLin.toContinuousLinearMap`,
+  prove observability via `Matrix.isSymmetric_toEuclideanLin_iff` and `LinearMap.IsSymmetric.isSelfAdjoint`.
+- First Sprint should be treated as closed. Do not keep expanding bootstrap scope unless a small cleanup directly supports the Phase 1 audit.
