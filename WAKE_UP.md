@@ -6,8 +6,9 @@
 - Current library entry point is [LeanPhysics.lean](/Users/pleddy/docs/cloudautomat/code/projects/master_plan/LeanPhysics.lean)
 - The practical bootstrap / First Sprint is complete
 - `First Sprint` is currently estimated at `100%` complete
-- Whole master plan completion estimate is `20%`
+- Whole master plan completion estimate is `21%`
 - Last verified build size: `3314` jobs
+- Phase 1.1 and Phase 1.2 are now marked in progress because the dependency audit has started
 
 ## What Landed Most Recently
 
@@ -28,6 +29,8 @@
 - [Main.lean](/Users/pleddy/docs/cloudautomat/code/projects/master_plan/Main.lean) no longer repeats the root `LeanPhysics` import
 - First Sprint completion and Mathlib API findings are recorded in:
   [milestones/2026-04-25-first-sprint-complete.md](/Users/pleddy/docs/cloudautomat/code/projects/master_plan/milestones/2026-04-25-first-sprint-complete.md)
+- Phase 1 dependency audit start is recorded in:
+  [milestones/2026-04-25-phase1-dependency-audit-start.md](/Users/pleddy/docs/cloudautomat/code/projects/master_plan/milestones/2026-04-25-phase1-dependency-audit-start.md)
 - Tracking docs updated:
   - [STATUS.md](/Users/pleddy/docs/cloudautomat/code/projects/master_plan/STATUS.md)
   - [progress.md](/Users/pleddy/docs/cloudautomat/code/projects/master_plan/progress.md)
@@ -43,9 +46,9 @@
 
 ## Best Next Steps
 
-1. Begin a written Mathlib dependency audit for Phase 1.1 and Phase 1.2.
-2. Decide whether the next expectation-value increment should be positivity/projector lemmas or more concrete examples.
-3. If another finite-dimensional example is wanted, the clean next candidates are Pauli-X, Pauli-Y, or a rank-one projector.
+1. Add a small compiling Lean probe for Mathlib's spectrum API on `BoundedOperator`.
+2. Check `spectrum 𝕜 A`, `resolventSet 𝕜 A`, and `resolvent A z` against `H ->L[𝕜] H` before creating any local `Spectrum` abstraction.
+3. Decide whether the next expectation-value increment should be positivity/projector lemmas or more concrete examples.
 
 ## Notes For The Next Iteration
 
@@ -64,4 +67,6 @@
   define a `2 × 2` Hermitian matrix,
   use `Matrix.toEuclideanLin.toContinuousLinearMap`,
   prove observability via `Matrix.isSymmetric_toEuclideanLin_iff` and `LinearMap.IsSymmetric.isSelfAdjoint`.
+- Phase 1 audit decision so far:
+  keep using `[NormedAddCommGroup H] [InnerProductSpace 𝕜 H] [CompleteSpace H]`, `ContinuousLinearMap`, `IsSelfAdjoint`, and `unitary (H ->L[𝕜] H)` directly until a theorem forces a bundled local abstraction.
 - First Sprint should be treated as closed. Do not keep expanding bootstrap scope unless a small cleanup directly supports the Phase 1 audit.
