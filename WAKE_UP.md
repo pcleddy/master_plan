@@ -6,8 +6,8 @@
 - Current library entry point is [LeanPhysics.lean](/Users/pleddy/docs/cloudautomat/code/projects/master_plan/LeanPhysics.lean)
 - The practical bootstrap / First Sprint is complete
 - `First Sprint` is currently estimated at `100%` complete
-- Whole master plan completion estimate is `21%`
-- Last verified build size: `3314` jobs
+- Whole master plan completion estimate is `22%`
+- Last verified build size: `3324` jobs
 - Phase 1.1 and Phase 1.2 are now marked in progress because the dependency audit has started
 
 ## What Landed Most Recently
@@ -31,6 +31,10 @@
   [milestones/2026-04-25-first-sprint-complete.md](/Users/pleddy/docs/cloudautomat/code/projects/master_plan/milestones/2026-04-25-first-sprint-complete.md)
 - Phase 1 dependency audit start is recorded in:
   [milestones/2026-04-25-phase1-dependency-audit-start.md](/Users/pleddy/docs/cloudautomat/code/projects/master_plan/milestones/2026-04-25-phase1-dependency-audit-start.md)
+- First bounded-operator spectrum API probe added:
+  [LeanPhysics/Foundations/Spectrum.lean](/Users/pleddy/docs/cloudautomat/code/projects/master_plan/LeanPhysics/Foundations/Spectrum.lean)
+- Spectrum probe findings are recorded in:
+  [milestones/2026-04-25-spectrum-api-probe.md](/Users/pleddy/docs/cloudautomat/code/projects/master_plan/milestones/2026-04-25-spectrum-api-probe.md)
 - Tracking docs updated:
   - [STATUS.md](/Users/pleddy/docs/cloudautomat/code/projects/master_plan/STATUS.md)
   - [progress.md](/Users/pleddy/docs/cloudautomat/code/projects/master_plan/progress.md)
@@ -39,6 +43,7 @@
 
 - [LeanPhysics/Foundations/HilbertBasic.lean](/Users/pleddy/docs/cloudautomat/code/projects/master_plan/LeanPhysics/Foundations/HilbertBasic.lean)
 - [LeanPhysics/Foundations/Operators.lean](/Users/pleddy/docs/cloudautomat/code/projects/master_plan/LeanPhysics/Foundations/Operators.lean)
+- [LeanPhysics/Foundations/Spectrum.lean](/Users/pleddy/docs/cloudautomat/code/projects/master_plan/LeanPhysics/Foundations/Spectrum.lean)
 - [LeanPhysics/Foundations/Unitary.lean](/Users/pleddy/docs/cloudautomat/code/projects/master_plan/LeanPhysics/Foundations/Unitary.lean)
 - [LeanPhysics/Quantum/States.lean](/Users/pleddy/docs/cloudautomat/code/projects/master_plan/LeanPhysics/Quantum/States.lean)
 - [LeanPhysics/Quantum/Observables.lean](/Users/pleddy/docs/cloudautomat/code/projects/master_plan/LeanPhysics/Quantum/Observables.lean)
@@ -46,8 +51,8 @@
 
 ## Best Next Steps
 
-1. Add a small compiling Lean probe for Mathlib's spectrum API on `BoundedOperator`.
-2. Check `spectrum 𝕜 A`, `resolventSet 𝕜 A`, and `resolvent A z` against `H ->L[𝕜] H` before creating any local `Spectrum` abstraction.
+1. Check Mathlib support for self-adjoint bounded operators having real spectrum or spectrum restrictions.
+2. Decide whether point spectrum should be approached through `LinearMap` eigenspaces before Banach-algebra spectrum.
 3. Decide whether the next expectation-value increment should be positivity/projector lemmas or more concrete examples.
 
 ## Notes For The Next Iteration
@@ -69,4 +74,6 @@
   prove observability via `Matrix.isSymmetric_toEuclideanLin_iff` and `LinearMap.IsSymmetric.isSelfAdjoint`.
 - Phase 1 audit decision so far:
   keep using `[NormedAddCommGroup H] [InnerProductSpace 𝕜 H] [CompleteSpace H]`, `ContinuousLinearMap`, `IsSelfAdjoint`, and `unitary (H ->L[𝕜] H)` directly until a theorem forces a bundled local abstraction.
+- Spectrum API probe decision so far:
+  use Mathlib's `spectrum`, `resolventSet`, and `resolvent` directly for `BoundedOperator`; the general Banach-algebra norm bound compiles as `‖z‖ ≤ ‖A‖ * ‖1‖`, while the sharper `‖z‖ ≤ ‖A‖` theorem needs a `NormOneClass` instance that is not currently synthesized for this alias.
 - First Sprint should be treated as closed. Do not keep expanding bootstrap scope unless a small cleanup directly supports the Phase 1 audit.

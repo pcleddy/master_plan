@@ -2,7 +2,7 @@
 
 ## Current State
 
-Repository bootstrap and the practical First Sprint are complete. The project now has a working Lean 4 + Mathlib workspace, a stable initial source-tree shape, a first reusable theorem layer around pure states, phase-equivalence, bounded operators, bounded observables, expectation values, unitary operators, and qubit examples, and the Phase 1 dependency audit has started.
+Repository bootstrap and the practical First Sprint are complete. The project now has a working Lean 4 + Mathlib workspace, a stable initial source-tree shape, a first reusable theorem layer around pure states, phase-equivalence, bounded operators, bounded observables, expectation values, unitary operators, and qubit examples, and the Phase 1 bounded-operator spectrum API probe has started.
 
 ## 10k View
 
@@ -10,6 +10,7 @@ Repository bootstrap and the practical First Sprint are complete. The project no
 - Lean 4 + Mathlib project at repository root
 - Initial module tree for Hilbert basics, bounded operators, states, observables, and a qubit example
 - First import-thinning pass complete: `LeanPhysics.Basic` no longer imports all of `Mathlib`
+- First spectrum-facing module added for bounded-operator spectrum/resolvent probes
 - `STATUS.md` as the current-state dashboard
 - `milestones/` for major findings and structural decisions
 - Phase 1 audit start recorded in [milestones/2026-04-25-phase1-dependency-audit-start.md](/Users/pleddy/docs/cloudautomat/code/projects/master_plan/milestones/2026-04-25-phase1-dependency-audit-start.md)
@@ -20,6 +21,7 @@ Current theorem inventory is intentionally small and focused on the bounded-oper
 
 - `Foundations/HilbertBasic`: pure-state predicate and basic norm consequences
 - `Foundations/Operators`: basic bounded-operator evaluation and composition lemmas
+- `Foundations/Spectrum`: first Mathlib spectrum/resolvent API bridge for bounded operators
 - `Foundations/Unitary`: stage-one unitary subgroup wrapper with identity, composition, norm-preservation, and inner-product-preservation lemmas
 - `Quantum/States`: phase-equivalence scaffolding and pure-state invariance under unit-norm scalars
 - `Quantum/Observables`: stage-one bounded observable wrapper, first expectation-value definition, expectation reality lemmas for observables, and closure under `0`, `+`, `-`, real scalar multiplication, conjugation, and the Gram operator construction `A†A`
@@ -27,22 +29,22 @@ Current theorem inventory is intentionally small and focused on the bounded-oper
 
 ## Counts
 
-- Lean modules: 7 library files plus root/exe files
-- Last verified build size: 3314 jobs
-- Proven lemmas/theorems: 41 across the current foundation layer
+- Lean modules: 8 library files plus root/exe files
+- Last verified build size: 3324 jobs
+- Proven lemmas/theorems: 44 across the current foundation layer
 - Open research machinery implemented: 0
   This is deliberate. The project is still avoiding spectral theorem, unbounded operators, RG flow, and spectral geometry until the base layer is less fragile.
 
 ## Current Focus
 
-1. Turn the Phase 1 dependency audit into a small compiling spectrum-API probe
+1. Extend the first compiling spectrum-API probe toward self-adjoint and point-spectrum checks
 2. Keep abstractions thin and Mathlib-native
 3. Delay heavy targets such as the full spectral theorem, unbounded operators, RG flow, and heat-kernel asymptotics until the dependency audit identifies a viable path
 
 ## Immediate Next Actions
 
-1. Add a small Lean probe for Mathlib's `spectrum`, `resolventSet`, and `resolvent` APIs on `BoundedOperator`
-2. Check whether `H ->L[𝕜] H` has all normed-algebra instances needed for the spectrum API without extra local wrappers
+1. Check Mathlib support for self-adjoint operators having real spectrum or spectrum restrictions
+2. Decide whether point spectrum should be approached through `LinearMap` eigenspaces before Banach-algebra spectrum
 3. Decide whether the next expectation-value layer should add positivity/projector lemmas or stay example-driven
 4. Continue import thinning only when a specific module has an obvious broad dependency
 

@@ -15,12 +15,12 @@ Update this file as you complete problems. Use the status indicators below.
 
 ## Snapshot
 
-- Current stage: Phase 1 dependency audit for Hilbert-space and bounded-operator expansion
+- Current stage: Phase 1 bounded-operator spectrum API probe
 - Build status: `lake build` is green
-- Current code focus: Mathlib-native Hilbert-space/operator APIs, spectrum API probing, and keeping local wrappers thin
+- Current code focus: Mathlib-native spectrum/resolvent APIs for bounded operators, with local wrappers kept thin
 - First Sprint completion estimate: `100%`
-- Whole master plan completion estimate: `21%`
-- Last verified build size: `3314` jobs after the first import-thinning pass
+- Whole master plan completion estimate: `22%`
+- Last verified build size: `3324` jobs after adding the first spectrum API probe
 - Heavy downstream targets such as the spectral theorem, RG flow, and spectral geometry are still intentionally deferred
 
 ## Stage Tracker
@@ -83,11 +83,18 @@ These percentages are planning weights, not theorem counts. They are meant to sh
 - `Main.lean` no longer repeats the root `LeanPhysics` import
 - `lake build` is verified after the cleanup
 
+### Spectrum API Probe
+
+- `Foundations/Spectrum` now exposes the Mathlib `spectrum`, `resolventSet`, and `resolvent` APIs using project bounded-operator terminology
+- The first spectrum-facing bounded-operator facts compile: the resolvent set is open, the spectrum is closed, and spectral values satisfy Mathlib's general Banach-algebra norm bound
+- `LeanPhysics.lean` imports the spectrum probe module
+
 ### API Audit Notes
 
 - First Mathlib API findings are recorded in `milestones/2026-04-25-first-sprint-complete.md`
 - The sprint ended with aliases and predicates where Mathlib already has the right structure: `ContinuousLinearMap`, `IsSelfAdjoint`, and `unitary`
 - The Phase 1 dependency audit has started in `milestones/2026-04-25-phase1-dependency-audit-start.md`
+- The first spectrum API probe is recorded in `milestones/2026-04-25-spectrum-api-probe.md`
 
 ## To Do
 
@@ -106,7 +113,8 @@ These percentages are planning weights, not theorem counts. They are meant to sh
 
 ### 🟠 Phase 1.2 Bounded Operators And Spectrum (`11%`)
 
-- Audit has started; next concrete step is a small compiling probe against Mathlib's `spectrum`, `resolventSet`, and `resolvent` APIs for `BoundedOperator`
+- Initial `spectrum`, `resolventSet`, and `resolvent` probe compiles for `BoundedOperator`
+- Next concrete step is checking self-adjoint real-spectrum support and deciding whether point spectrum should go through `LinearMap` eigenspaces first
 - Build a fuller bounded-operator and spectrum layer
 - Add operator norm and spectral-facing results beyond the current closure lemmas
 - Audit and then formalize the spectral theorem dependencies instead of just bounded observable closure
@@ -157,4 +165,4 @@ These percentages are planning weights, not theorem counts. They are meant to sh
 ## Practical Read
 
 - If the question is “what is done?”, the answer is: the repository has crossed from bootstrap into a small but real bounded-operator formalization with reusable lemmas and one worked finite-dimensional example.
-- If the question is “what is still to do?”, the answer is: almost all of the deep mathematics in the master plan remains ahead, and the next serious step is to turn the Phase 1 dependency audit into a compiling spectrum-API probe before attempting spectral-theorem-scale work.
+- If the question is “what is still to do?”, the answer is: almost all of the deep mathematics in the master plan remains ahead, and the next serious step is to audit self-adjoint real-spectrum support before attempting spectral-theorem-scale work.
